@@ -1,0 +1,131 @@
+
+{% load static %}
+
+
+
+
+<html>
+<head> <title> Register page </title>
+<style type="text/css">
+body
+{
+	color:blue;
+	background-color:LightSteelBlue;
+}
+form
+{
+	background-color:HoneyDew;
+	border:3px solid blue;
+	margin:60px;
+}
+h3
+{
+	color:#FF000;
+
+}
+input{
+	color:darkred;
+}
+table th{
+float:left;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<h1 style="color:red;background-color:GreenYellow;font-size:50px;" >  * * * * PLEASE REGISTER HERE * * * *</h1>
+
+
+	<form name="register" action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+	<h3 style="color:white;background-color: blue; text-decoration: underline;text-transform: uppercase;font-weight: bold;font-size: 30px;text-align:center;">Fill the Form Correctly.</h3>
+	<table style="allign:left;">
+
+
+
+<tr>
+<th>1. Enter Your Name :</th>
+<th><input style="margin-left:98px" type="text" name="first_name" placeholder="First Name" required><br> </th>
+<th><input style="margin-left:25px"  type="text" name="last_name" placeholder="Last Name" required><br> </th>
+</tr>
+
+<tr>
+<th><label>2. Enter Your Email Id:</label></th>
+<th> <input placeholder="@gmail.com" style="margin-left:82px" type="text" name="email" required><br></th>
+</tr>
+
+<tr>
+<th><label>3. Enter Your password:</label></th>
+<th><input placeholder="Password" style="margin-left:78px" type="password" name="password" required> <br/></th>
+</tr>
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<tr>
+    <th><label>4.Confirm password:</label></th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input placeholder="Confirm Password" style="margin-left:78px" type="password" name="password1" required> <br/></th>
+    </tr>
+
+<tr>
+<th><label>5. Enter your DOB:</label></th>
+ <th> <input placeholder="D.O.B" style="margin-left:110px" type="date"  name="dob" required></th>&nbsp;&nbsp;&nbsp;
+ <th> <input type="button" value="OK" style="background-color:blue;color:white;" required><br></th>
+</tr>
+
+<tr>
+    <th>  6. Enter Your Nationality:</th>
+    <th>&nbsp;&nbsp;&nbsp;<input style="margin-left:53px" placeholder="Nationality" type="text" name="nationality"  required><br> </th>
+
+    </tr>
+
+<tr>
+<th>7. Choose Your Gender :</th>
+<th><input style="margin-left:80px" type="radio" name="gender" value="MALE"/>MALE
+<input type="radio" name="gender"  value="FEMALE"/> FEMALE
+<input type="radio" name="gender"  value="OTHERS"/>OTHERS </th>
+</tr>
+
+
+
+
+ <tr>
+<th> <label for="phone">8. Enter Your Mobile Number: </label></th>
+ <th><input placeholder="Mobile Number" style="margin-left:35px" type="phone" id="phone" name="mobile" required><br></th>
+ </tr>
+ <tr>
+
+ <tr>
+<th><label>9. Enter Your Address:</label></th>
+<th><textarea placeholder="Address" style="margin-left:78px" name="address" rows="4" cols="40" ></textarea> <br/></th>
+ </tr>
+
+ <tr>
+	<th><label>10. Upload your photo:</label></th>
+	<th><input type="file" name="image" id="uploadFromPC"  title="Upload From PC"  style= "margin-left:82px"> <br></th>
+	</tr>
+
+ <tr>
+<th colspan="2"> <input style="background-color:SteelBlue;color:white;" type="submit" value="CREATE ACCOUNT"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="reset" style="background-color:red;color:white;" value="RESET"/> </th>
+</tr>
+
+</table>
+</form>
+
+</body>
+</html>
+

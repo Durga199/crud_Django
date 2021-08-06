@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        #bg{
+    background-size: 1800px 900px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
+    </style>
+
+</head>
+<body id="bg" style="background-image: url('{% static "images/img2.jpg" %}');">
+<center><h1 style="color:red;"><u><strong>WELCOME TO FAMILY APP</strong> </u></h1></center>
+<br><h3 style="color: blue"> please LOGIN to access this website</h3><br><br>
+<!--<img src="{% static 'images/img1.jpg' %}"></img>-->
+<table>
+    <tr>
+
+<th><a href="{% url 'register' %}"><button style="color:white;background-color:blue;font-size : 25px;">SIGN UP</button></a></th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'login' %}"><button style="color:white;background-color:green;font-size : 25px;">LOGIN</button></a></th>
+    </tr>
+</table>
+</body>
+</html>

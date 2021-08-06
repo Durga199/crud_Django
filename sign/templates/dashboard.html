@@ -1,0 +1,110 @@
+
+
+{% load static %}
+
+  <html>
+  <head>
+  <title>Welcome To view</title>
+      <style>
+          .th1{
+          color : red;
+          font-size : 20px;
+          }
+
+      </style>
+
+
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add or Remove Input Fields Dynamically using jQuery - MyNotePaper</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </head>
+
+	<body style="background-color : cyan;">
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'logout' %}"><button style="color:white;background-color:green;font-size : 25px;">LOGOUT</button></a>
+
+
+<center><h1><u><b style="color : red">WELCOME Mr/Mrs.</b> <strong style="color : green">{{users.first_name}}</strong> </u></h1>
+<table style=" text-align: left;border: 5px;">
+    <tr><th colspan="2"> <img height="150xp" width="250px" src="/media/{{users.image}}"> </th> </tr>
+    <tr> <th>First Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> <th class="th1"> {{users.first_name}} </th></tr>
+    <tr></tr>
+    <tr> <th>Last Name :</th> <th class="th1"> {{users.last_name}} </th></tr>
+    <tr></tr>
+    <tr> <th>Email Id :</th> <th class="th1"> {{users.email}} </th></tr>
+    <tr></tr>
+    <tr> <th>Date of Birth :</th> <th class="th1"> {{users.dob}} </th></tr>
+    <tr></tr>
+    <tr> <th>Nationality :</th> <th class="th1"> {{users.nationality}} </th></tr>
+     <tr></tr>
+    <tr> <th>Mobile No. :</th> <th class="th1"> {{users.mobile}} </th></tr>
+     <tr></tr>
+    <tr> <th>Gender :</th> <th class="th1"> {{users.gender}} </th></tr>
+     <tr></tr>
+    <tr> <th>Address :</th> <th class="th1"> {{users.address}} </th></tr>
+</table><br>
+    <a href="/edit/{{users.id}}" class="btn btn-danger">UPDATE YOUR PROFILE</a>
+    </center><br>
+
+
+        <center><h2 style="color : darkgreen"><u>ADD YOUR FAMILY DETAILS HERE</u></h2>
+    <form action="family2/{{users.id}}" method="POST"><br>
+        {% csrf_token %}
+        {{users.id}}
+        <table id="tb">
+            <tr>
+                <th></th>
+                <th>Family member's Name</th>
+                 <th>Your Relation</th>
+                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age</th>
+                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender</th>
+                 <th>Add or Remove</th>
+            </tr>
+            <tr>
+                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" name="owner_id" value="{{users.id}}" id="tl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input type="text" name="name" placeholder="enter name" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                 <td><select name="relation" class="form-control" required="">
+                    <option value="">--Select your relation--</option>
+                    <option value="father">FATHER</option>
+                    <option value="mother">MOTHER</option>
+                    <option value="brother">BROTHER</option>
+                    <option value="sister">SISTER </option>
+                    <option value="son">SON</option>
+                    </select></td>
+                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="age" placeholder="enter age">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                 <td><select name="gender" class="form-control" required="">
+                    <option value="">--Select HIS/HER gender--</option>
+                    <option value="MALE">MALE</option>
+                     <option value="FEMALE">FEMALE</option></select></td>
+                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="BUTTON" name="add" value="add" id="add"></td>
+<!--               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="BUTTON" name="name" value="Remove" id="remove">-->
+            </tr>
+        </table>
+         <input type="submit" value="SAVE" style="background-color : yellow;">
+    </form>
+            </center>
+
+    <script>
+        $(document).ready(function(){
+        var i = 0;
+        var html = '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" name="owner_id" value="{{users.id}}" id="tl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="text" name="name" placeholder="enter name" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><select name="relation" class="form-control" required=""><option value="">--Select your relation--</option><option value="father">FATHER</option><option value="mother">MOTHER</option><option value="brother">BROTHER</option><option value="sister">SISTER </option><option value="son">SON</option></select></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="age" placeholder="enter age">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><select name="gender" class="form-control" required=""><option value="">--Select HIS/HER gender--</option><option value="father">MALE</option><option value="mother">FEMALE</option></select></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="BUTTON" name="remove" value="Remove" id="remove"></td></tr><br><br>';
+
+        $("#add").click(function(){
+            $("#tb").append(html);
+            i++;
+            $("#tl").val(i);
+        });
+
+        $("#tb").on('click','#remove',function(){
+            $(this).closest('tr').remove();
+        });
+
+
+    });
+    </script>
+
+    </body>
+  </html>
